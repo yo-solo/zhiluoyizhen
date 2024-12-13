@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>激光设备数据展示</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        #status {
+            margin-bottom: 20px;
+        }
+        #data {
+            font-size: 24px;
+            color: #333;
+            padding: 10px;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+    <h1>激光设备数据展示</h1>
+    <div id="status">连接状态: <span id="connectionStatus">未连接</span></div>
+    <div id="data">等待数据...</div>
+
+    <script>
+        const connectionStatus = document.getElementById('connectionStatus');
+        const dataDiv = document.getElementById('data');
+
+        // 根据后端地址调整WebSocket URL
+        const ws = new WebSocket('ws://localhost:9000/ws/laser');
+
+        ws.onopen = () => {
+            connectionStatus.textContent = '已连接';
+            connectionStatus.style.color = 'green';
+            console.log('已连接到激光设备WebSocket');
+        };
+
+        ws.onmessage = (event) => {
+            console.log('接收到数据:', event.data);
+            dataDiv.textContent = event.data;
+        };
+
+        ws.onclose = () => {
+            connectionStatus.textContent = '已断开';
+            connectionStatus.style.color = 'red';
+            console.log('激光设备WebSocket已断开');
+        };
+
+        ws.onerror = (error) => {
+            console.error('WebSocket错误:', error);
+            connectionStatus.textContent = '错误';
+            connectionStatus.style.color = 'orange';
+        };
+    </script>
+</body>
+</html>

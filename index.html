@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知络医诊诊断系统</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="container">
+            <!-- 进度指示器开始 -->
+            <div class="progress-indicator">
+                <div class="step active" id="step1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">填写个人信息</div>
+                </div>
+                <div class="step" id="step2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">检测体质</div>
+                </div>
+                <div class="step" id="step3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">针灸开方</div>
+                </div>
+                <div class="step" id="step4">
+                    <div class="step-number">4</div>
+                    <div class="step-label">针灸中</div>
+                </div>
+                <div class="step" id="step5">
+                    <div class="step-number">5</div>
+                    <div class="step-label">针灸后</div>
+                </div>
+            </div>
+            <!-- 进度指示器结束 -->
+
+            <div id="welcomePage">
+                <h1>欢迎使用知络医诊诊断系统</h1>
+                <p>我们将通过一系列问题来了解您的情况，以便为您提供最准确的诊断。</p>
+                <button class="btn" onclick="startDiagnosis()">开始诊断</button>
+            </div>
+
+            <div id="questionContainer" style="display: none;"></div>
+
+            <div id="chatInterface" style="display: none;">
+                <h1>知络医诊诊断系统</h1>
+                <div id="chatbox"></div>
+                <div class="chat-input-container">
+                    <input type="text" id="messageInput" placeholder="请描述您的症状...">
+                    <button id="sendMessage">发送</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="videoContainer">
+            <h1>视频输出</h1>
+            <div id="videoOutput">
+                <!--<img src="http://192.168.1.219:50001/rtsptohttp" alt="视频流">-->
+                <img src="http://192.168.31.211/mjpeg/1" alt="视频流">
+            </div>
+            <p>视频输出区域</p>
+            <!-- 显示关键点坐标的区域 -->
+            <div id="keypointCoordinatesContainer"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="./js/marked.min.js"></script>
+</body>
+</html>
